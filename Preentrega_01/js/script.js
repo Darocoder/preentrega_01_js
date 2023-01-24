@@ -20,6 +20,7 @@ function ingresaCantidad() {
 //Variables
 let listaProducto = [];
 let listaCantidad = [];
+const listaProductosCantidades = []
 
 //Inicio del programa
 alert ("Bienvenido a tu lista de compra, puedes ingresar los items a comprar");
@@ -39,6 +40,8 @@ while (producto != "ESC") {
         //break
     //}
     cantidad = ingresaCantidad();
+    //Creo un objeto con atributos, sin borrar la lógica anterior.
+    listaProductosCantidades.push({nombre: producto, unidades: cantidad});
     //cantidadTotalDeProductos = Number (cantidadTotalDeProductos) + Number (cantidad)  
     cantidadTotalDeProductos += Number(cantidad);
     console.log ("Item nº " + i + " ---> " + cantidad + " unidades de " + producto);  
@@ -58,21 +61,20 @@ let cantidadEncontrada;
 let productoBuscado = prompt ("Ingrese un producto para saber la cantidad a comprar");
 let posicionProductoBuscado = listaProducto.indexOf(productoBuscado);
 if (posicionProductoBuscado == -1){
-    cantidadEncontrada = 0;
+    cantidadEncontrada = "0";
 }
 else{
     cantidadEncontrada = listaCantidad[posicionProductoBuscado];
 }
-
 alert ("La cantidad a comprar de " + productoBuscado + " es " + cantidadEncontrada + " unidades" );
 
-/* const listadoCursos = [
-    {nombre: 'Javascript', precio: 15000},
-    {nombre: 'ReactJS', precio: 22000},
-]
-
-const resultado = listadoCursos.find((curso) => curso.nombre === "ReactJS")
-const resultado2 = listadoCursos.find((curso) => curso.nombre === "DW")
-
-console.log(resultado) // {nombre: 'ReactJS', precio: 22000}
-console.log(resultado2) // undefined */
+//Busco nuevamente usando el método find en el array de objetos
+productoBuscado = prompt ("Ingrese otro producto para saber la cantidad a comprar (ahora lo vamos a buscar en un array de objetos)");
+cantidadEncontrada = listaProductosCantidades.find((productoActual) => productoActual.nombre === productoBuscado);
+if (cantidadEncontrada == undefined){
+    cantidadEncontrada = "0";
+}
+else {
+    cantidadEncontrada = cantidadEncontrada.unidades;
+}
+alert ("La cantidad a comprar de " + productoBuscado + " es " + cantidadEncontrada + " unidades" );
