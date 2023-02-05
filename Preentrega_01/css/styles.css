@@ -1,0 +1,101 @@
+* { 
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-color: gainsboro;
+}
+
+.titulo {
+    display: flex;
+    justify-content: center;
+    color: gray;
+    margin-top: 30px;
+    margin-bottom: 20px;
+}
+.box {
+    display: flex;
+    justify-content: center;
+}
+
+.box .instrucciones {
+    margin: 20px;
+}
+
+.box .formCarga {
+    margin: 20px;
+}
+
+.botonesForm {
+    margin-top: 10px;
+    display: flex;
+    justify-content: right;
+}
+
+.botonesForm .botonGuardar {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin-right: 10px;     
+}
+
+.botonesForm .botonGuardar:hover {
+    background-color: #b5cfb6;
+    color: rgb(0, 0, 0);
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+
+}
+
+.botonesForm .botonEliminarUltimo:hover {
+    background-color: #e38181;
+    color: rgb(0, 0, 0);
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+
+}
+
+.botonesForm .botonEliminarUltimo {
+    background-color: #c83333; 
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
+
+h3 {
+    text-align: center;
+    margin: 5px;
+}
+
+.listaDeCompraBox p {
+    font-weight: bold;
+}
+
+.listaDeCompraBox {
+    margin: auto;
+    font-style: italic;
+    border-style: solid;
+    border-color: grey;
+    border-width: 5px;
+    padding: 10px;
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.listaDeCompraBox ul {
+    margin-top: 15px;
+}
+
+.listaDeCompraBox ul li {
+    text-decoration: none;
+    list-style: none;
+    color: #3b9e3f;
+}

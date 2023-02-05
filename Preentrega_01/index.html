@@ -4,11 +4,47 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="js/script.js"></script>
-    <title>Document</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <title>Proyecto JS</title>
 </head>
+
 <body>
-    <h1>Esta es la segunda preentrega del proyecto final</h1>
+    <div class="titulo">
+        <h1>TERCERA PRE ENTREGA - PROYECTO FINAL JS</h1>
+    </div>
+    <div class="box">
+        <div class="instrucciones">
+            <h2>Bienvenido a tu lista de compra</h2>
+            <p>Ingresa a continuación lo que deseas comprar</p>
+        </div>
+        
+        <div class="formCarga">
+                <div class="camposForm">
+                    <label class="etiquetaImputProducto" for="nombreProducto"><b>Poducto</b></label>
+                    <input id="inputProducto" type="text" placeholder="Producto" name="producto">
+                    <label class="etiquetaImputCantidad" for="cantidadProducto"><b>Cantidad</b></label>
+                    <input id="inputCantidad" type="text" placeholder="Cantidad" name="cantidad">
+                </div>
+
+                <div class="botonesForm">
+                    <button id="GuardarItem" class="botonGuardar">Guardar item</button>
+                    <button id="borrar" class="botonEliminarUltimo">Eliminar último</button>
+                </div>
+
+            
+        </div>
+
+    </div>
+    <h3>Listad de productos elegidos</h3>
+    <div class="listaDeCompraBox">
+        <p>Productos a comprar:</p>
+        <ul id="listaDeCompras" class="ListaDeCompras">
+        </ul>
+    </div>
+    <script src="js/script.js"></script>
     
 </body>
+
+
+
 </html>
