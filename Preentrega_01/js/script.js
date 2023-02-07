@@ -10,6 +10,7 @@ let listaDeCompras = [];
 
 // recupero del storage la compra anterior (por si recarga la página)
 let listaStorage = JSON.parse(sessionStorage.getItem("listaDeCompras"));
+if (listaStorage) {
 for (let compraRecuperadaDelStorage of listaStorage ){
     listaDeCompras.push(compraRecuperadaDelStorage);
     let li = document.createElement("li");
@@ -18,6 +19,7 @@ for (let compraRecuperadaDelStorage of listaStorage ){
     console.log("Agregando " + compraRecuperadaDelStorage.producto);
 }
 console.log(listaDeCompras);
+}
 
 // declaro una clase compra para construir el objeto de productos y cantidades
 class Compra{
