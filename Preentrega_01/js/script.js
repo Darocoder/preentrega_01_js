@@ -32,7 +32,7 @@ if (listaStorage) {
 
         //asigno una clase css a cada div
         divFila.className = "fila";
-        li.id="fila_" + numProducto;
+        li.id = "fila_" + numProducto;
         divColumnaIzq.className = "columna izquierda";
         divColumnaMed.className = "columna centro";
         divColumnaDer.className = "columna derecha";
@@ -53,18 +53,23 @@ if (listaStorage) {
         // asigno una funcionalidad al botón sobre cada ítem recuperado del storage
         botonBorrar.onclick = () => {
             console.log("Eliminando fila " + "fila_" + botonBorrar.id);
-            console.log(listaDeCompras)
 
             let eliminado = listaDeCompras[botonBorrar.id];
             if (eliminado){   
+                // borro el elemento del array
                 delete listaDeCompras[botonBorrar.id];     
                 listaDeCompras.remove    
                 console.log("por borrar el elemento " + String(botonBorrar.id));
+
+                //borro el elemento del html (el li completo)
                 document.getElementById("fila_" + botonBorrar.id).remove();
                 console.log ("Has eliminado "+ eliminado.producto);
-                console.log (listaDeCompras);
+
+                // guardo en el storage el estado actual de la compra
                 sessionStorage.setItem("listaDeCompras", JSON.stringify(listaDeCompras));
-                }
+            }
+            console.log(listaDeCompras)
+
         }
         divColumnaDer.appendChild(botonBorrar);
 
@@ -95,11 +100,20 @@ boton.onclick = () => {
     contenidoFormularioCantidad = document.getElementById("inputCantidad");
 
     if (contenidoFormularioProducto.value == "" || contenidoFormularioCantidad.value == "")
-        console.log("Formulario en incompleto")
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Debe completar el formulario para continuar',
+        })
     else {
         let cantidadActual =  contenidoFormularioCantidad.value;
         if (isNaN(cantidadActual))
-            console.log("No es un número");
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'La cantidad debe ser un número',
+            })
+            
         else{
             console.log(contenidoFormularioProducto.value);
             console.log(contenidoFormularioCantidad.value);
