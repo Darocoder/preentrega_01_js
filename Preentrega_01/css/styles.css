@@ -85,9 +85,9 @@ h3 {
     border-width: 5px;
     padding: 10px;
     width: 40%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    /*display: flex; 
+    flex-direction: column; 
+    align-items: center;*/
 }
 
 .listaDeCompraBox ul {
@@ -99,3 +99,23 @@ h3 {
     list-style: none;
     color: #3b9e3f;
 }
+
+ /* Clear floats after the columns */
+ .fila:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+
+  .columna {
+    float: left;
+  }
+
+  .izquierda {
+    width: 60%;
+  }
+  
+  .centro, .derecha {
+    width: 20%;
+    text-align: right;
+  }

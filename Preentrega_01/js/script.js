@@ -14,7 +14,34 @@ if (listaStorage) {
 for (let compraRecuperadaDelStorage of listaStorage ){
     listaDeCompras.push(compraRecuperadaDelStorage);
     let li = document.createElement("li");
-    li.innerHTML = "Almacenado: " + "Producto: " + compraRecuperadaDelStorage.producto + "  ----->  " + compraRecuperadaDelStorage.cantidad + "unidades";
+    //li.innerHTML = "Almacenado: " + "Producto: " + compraRecuperadaDelStorage.producto + "  ----->  " + compraRecuperadaDelStorage.cantidad + "unidades";
+
+    // dentro del li, va un div, que contiene otros tres divs (producto, cantidad, eliminar)
+    let divFila = document.createElement("div");
+    let divColumnaIzq = document.createElement("div");
+    let divColumnaMed = document.createElement("div");
+    let divColumnaDer = document.createElement("div");
+
+    //asigno una clase css a cada div
+    divFila.className = "fila";
+    divColumnaIzq.className = "columna izquierda";
+    divColumnaMed.className = "columna centro";
+    divColumnaDer.className = "columna derecha";
+
+    // guardo el contenido de cada div
+    divColumnaIzq.innerHTML = compraRecuperadaDelStorage.producto;
+    divColumnaMed.innerHTML = compraRecuperadaDelStorage.cantidad;
+    divColumnaDer.innerHTML = "eliminar";
+
+    // pinto de otro color los recuperados
+    divColumnaIzq.style.color = "grey";
+
+    // creo la estructura html con jerarquías (li contiene div, que contiene 3 divs)
+    divFila.appendChild(divColumnaIzq);
+    divFila.appendChild(divColumnaMed);
+    divFila.appendChild(divColumnaDer);
+    li.appendChild(divFila);
+
     lista.appendChild(li);
     console.log("Agregando " + compraRecuperadaDelStorage.producto);
 }
@@ -44,9 +71,36 @@ boton.onclick = () => {
         else{
             console.log(contenidoFormularioProducto.value);
             console.log(contenidoFormularioCantidad.value);
+
+            // creo un li
             let li = document.createElement("li");
-            li.innerHTML = "Agregando: " + "Producto: " + contenidoFormularioProducto.value + "  ----->  " + contenidoFormularioCantidad.value + " unidades";
+            //li.innerHTML = "Agregando: " + "Producto: " + contenidoFormularioProducto.value + "  ----->  " + contenidoFormularioCantidad.value + " unidades";
+            
+            // dentro del li, va un div, que contiene otros tres divs (producto, cantidad, eliminar)
+            let divFila = document.createElement("div");
+            let divColumnaIzq = document.createElement("div");
+            let divColumnaMed = document.createElement("div");
+            let divColumnaDer = document.createElement("div");
+
+            //asigno una clase css a cada div
+            divFila.className = "fila";
+            divColumnaIzq.className = "columna izquierda";
+            divColumnaMed.className = "columna centro";
+            divColumnaDer.className = "columna derecha";
+
+            // guardo el contenido de cada div
+            divColumnaIzq.innerHTML = contenidoFormularioProducto.value;
+            divColumnaMed.innerHTML = contenidoFormularioCantidad.value;
+            divColumnaDer.innerHTML = "eliminar";
+
+            // creo la estructura html con jerarquías (li contiene div, que contiene 3 divs)
+            divFila.appendChild(divColumnaIzq);
+            divFila.appendChild(divColumnaMed);
+            divFila.appendChild(divColumnaDer);
+            li.appendChild(divFila);
             lista.appendChild(li);
+
+
             cantidadAcumulada += Number(contenidoFormularioCantidad.value);
             console.log("Acumulado: " + cantidadAcumulada);
             let compra = new Compra (contenidoFormularioProducto.value, contenidoFormularioCantidad.value);
