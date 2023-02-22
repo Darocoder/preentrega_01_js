@@ -158,6 +158,10 @@ boton.onclick = () => {
                     console.log ("Has eliminado "+ eliminado.producto);
                     console.log (listaDeCompras);
                     sessionStorage.setItem("listaDeCompras", JSON.stringify(listaDeCompras));
+                    Toastify({
+                        text: "Artículo eliminado",
+                        duration: 3000
+                        }).showToast();
                     }
             }
             
@@ -176,6 +180,10 @@ boton.onclick = () => {
             listaDeCompras.push (compra);
             console.log (listaDeCompras);
             sessionStorage.setItem("listaDeCompras", JSON.stringify(listaDeCompras));
+            Toastify({
+                text: "Artículo agregado",
+                duration: 3000
+                }).showToast();
         }
     }
     numProducto ++;
@@ -184,12 +192,8 @@ boton.onclick = () => {
 
 // evento cuando hacen click en Eliminar último
 boton2.onclick = () => {
-    let eliminado = listaDeCompras.pop ();
-    if (eliminado){            
-        lista.removeChild(lista.lastChild);
-        console.log ("Haz eliminado "+ eliminado.producto);
-        cantidadAcumulada -= eliminado.cantidad;            
-        console.log (listaDeCompras);
-        sessionStorage.setItem("listaDeCompras", JSON.stringify(listaDeCompras));
-        }
+    Toastify({
+        text: "This is a toast",
+        duration: 3000
+        }).showToast();
 }
