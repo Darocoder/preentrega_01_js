@@ -101,9 +101,10 @@ boton.onclick = () => {
 
     if (contenidoFormularioProducto.value == "" || contenidoFormularioCantidad.value == "")
         Swal.fire({
+            title: 'Error!',
+            text: 'Debes ingresar un producto',
             icon: 'error',
-            title: 'Oops...',
-            text: 'Debe completar el formulario para continuar',
+            confirmButtonText: 'Ok'
         })
     else {
         let cantidadActual =  contenidoFormularioCantidad.value;
@@ -188,12 +189,4 @@ boton.onclick = () => {
     }
     numProducto ++;
 
-}
-
-// evento cuando hacen click en Eliminar último
-boton2.onclick = () => {
-    Toastify({
-        text: "This is a toast",
-        duration: 3000
-        }).showToast();
 }

@@ -50,27 +50,10 @@
 
 }
 
-.botonesForm .botonEliminarUltimo:hover {
-    background-color: #e38181;
-    color: rgb(0, 0, 0);
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
-
-}
-
 .botonEliminar {
     background-color: #e38181;
     color: rgb(0, 0, 0);
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
-}
-.botonesForm .botonEliminarUltimo {
-    background-color: #c83333; 
-    border: none;
-    color: white;
-    padding: 10px 20px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
 }
 
 h3 {
