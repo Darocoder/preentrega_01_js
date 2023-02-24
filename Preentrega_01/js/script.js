@@ -1,11 +1,22 @@
 // declaro variables
+// declaro una clase compra para construir el objeto de productos y cantidades
+class Compra{
+    constructor(producto, cantidad){
+        this.producto = producto;
+        this.cantidad = Number (cantidad);
+    }
+}
 let boton = document.getElementById("GuardarItem");
 let boton2 = document.getElementById("borrar");
 let lista = document.getElementById("listaDeCompras");
+let botonEnvio = document.getElementById("CalculaEnvio");
+
 let contenidoFormularioProducto = "";
 let contenidoFormularioCantidad = "";
 let cantidadAcumulada = 0;
 let listaDeCompras = [];
+let productosValidos = []
+
 
 function eliminarProductoDeLaLista(idQueQuieroBorrar){
     console.log("Eliminando fila " + "fila_" + idQueQuieroBorrar);
@@ -54,7 +65,7 @@ function agregarFilaEnHTML(fila, esRecuperadoDelStorage){
 
         // reemplazo el if por un ternario (booleano)?acciónVerdadero:acciónFalso;
          (esRecuperadoDelStorage)?divColumnaIzq.style.color = "grey":divColumnaIzq.style.color = "blue";
-
+            
         let botonBorrar = document.createElement("botton");
         botonBorrar.innerHTML = "eliminar";
         botonBorrar.className = "botonEliminar";
@@ -102,11 +113,9 @@ function prometoTraerDatosDelStorage(){
             resolve (
                 traerDatosDelStorage(),
                 console.log("listo"))
-        }, 1000)
+        }, 2000)
     })
-  
 }
-
 
 //  variable global (tengo que acceder desde un evento)
 let numProducto = 0;
@@ -116,30 +125,21 @@ let listaStorage = JSON.parse(sessionStorage.getItem("listaDeCompras"));
 console.log("espero dos segundos para que me traiga los datos del storage")
 prometoTraerDatosDelStorage(),
 
-
-
-
 // termina la lógica de recuperar del storage
 
-// declaro una clase compra para construir el objeto de productos y cantidades
-class Compra{
-    constructor(producto, cantidad){
-        this.producto = producto;
-        this.cantidad = Number (cantidad);
-    }
-}
 
-function mensajeError(texto){
-    Swal.fire({
-        title: 'Error!',
-        text: texto,
-        icon: 'error',
-        confirmButtonText: 'Ok'
-    })
-}
+
 // evento cuando hacen click en Guardar item
 boton.onclick = () => {
-    console.log("El producto es " + numProducto)
+    function mensajeError(texto){
+        Swal.fire({
+            title: 'Error!',
+            text: texto,
+            icon: 'error',
+            confirmButtonText: 'Ok'
+        })
+    }
+
     contenidoFormularioProducto = document.getElementById("inputProducto");
     contenidoFormularioCantidad = document.getElementById("inputCantidad");
 
@@ -153,10 +153,51 @@ boton.onclick = () => {
         mensajeError('La cantidad debe ser un número');
         return
     }
- 
+
     let compra = new Compra (contenidoFormularioProducto.value, contenidoFormularioCantidad.value);
     //el false indica que NO voy a cambiar el color por defecto (que es verde)
     agregarFilaEnHTML(compra, false)
     listaDeCompras.push (compra);
     sessionStorage.setItem("listaDeCompras", JSON.stringify(listaDeCompras));
+}
+
+
+botonEnvio.onclick = () => {
+    console.log("mostrando costos de envio")
+    calculaCostoEnvio()
+}
+
+const calculaCostoEnvio = async(zona) => {
+
+    let costos = []
+
+    const resp = await fetch("codigosPostales.json")
+    // el profe dijo en clase que hay que hacer dos then para llegar al dato
+    .then ((res) => res.json(), 
+        console.log("termina el primer then")
+    )
+    .then (
+        (data) => { 
+        data.forEach(zona => {
+            console.log("Leyendo el código postal del json: " + zona.cp + " que pertener a la localidad de " + zona.localidad)
+            costos.push(zona)
+            console.log(costos)
+        });
+
+     
+        }
+    )
+    console.log("Termina el segundo then, verifico el costo de enviar a " )
+
+    let mostrar = ""
+    for (zona of costos){
+        mostrar+=zona.localidad + " (" + zona.cp + "): $" + zona.costoEnvio + "<br>"; 
+    }
+
+    Swal.fire({
+        title: 'Las costos por zona de envío son',
+        html: mostrar,
+        confirmButtonText: 'Ok'
+    })
+    
 }
