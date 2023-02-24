@@ -71,6 +71,7 @@ function agregarFilaEnHTML(fila, esRecuperadoDelStorage){
         divFila.appendChild(divColumnaDer);
         li.appendChild(divFila);
 
+        // finalmente, agrego el li al html
         lista.appendChild(li);
         console.log("Agregando " + fila.producto);
         if (!esRecuperadoDelStorage)
@@ -81,20 +82,43 @@ function agregarFilaEnHTML(fila, esRecuperadoDelStorage){
                 console.log(listaDeCompras);
         numProducto ++;
 }
+
+function traerDatosDelStorage(){
+    if (listaStorage) {
+        for (let compraRecuperadaDelStorage of listaStorage ){
+            if (!compraRecuperadaDelStorage){
+                console.log("el producto " + numProducto + " ya fue eliminado de la lista, se recupera un null y no se agrega nada")
+                continue;
+            }
+            agregarFilaEnHTML(compraRecuperadaDelStorage, true)
+            listaDeCompras.push(compraRecuperadaDelStorage);
+        }
+    }
+}
+
+function prometoTraerDatosDelStorage(){
+    return new Promise ( (resolve, reject) => {
+        setTimeout( () => {
+            resolve (
+                traerDatosDelStorage(),
+                console.log("listo"))
+        }, 1000)
+    })
+  
+}
+
+
 //  variable global (tengo que acceder desde un evento)
 let numProducto = 0;
 // recupero del storage la compra anterior (por si recarga la página)
 let listaStorage = JSON.parse(sessionStorage.getItem("listaDeCompras"));
-if (listaStorage) {
-    for (let compraRecuperadaDelStorage of listaStorage ){
-        if (!compraRecuperadaDelStorage){
-            console.log("el producto " + numProducto + " ya fue eliminado de la lista, se recupera un null y no se agrega nada")
-            continue;
-        }
-        agregarFilaEnHTML(compraRecuperadaDelStorage, true)
-        listaDeCompras.push(compraRecuperadaDelStorage);
-    }
-}
+
+console.log("espero dos segundos para que me traiga los datos del storage")
+prometoTraerDatosDelStorage(),
+
+
+
+
 // termina la lógica de recuperar del storage
 
 // declaro una clase compra para construir el objeto de productos y cantidades
